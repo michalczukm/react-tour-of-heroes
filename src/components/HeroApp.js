@@ -5,6 +5,7 @@ no-debugger: 0
 
 import React, {PropTypes} from 'react';
 import HeroDetail from './HeroDetail';
+import NewHero from './NewHero';
 
 class HeroApp extends React.Component {
   constructor(props) {
@@ -18,13 +19,13 @@ class HeroApp extends React.Component {
   render() {
     let appState = this.props.heroAppState;
     let actions = this.props.actions;
-    console.log("foo");
+
     return (
       <div>
         <h1>{appState.title}</h1>
         <h2>My Heroes</h2>
         <ul className="heroes">
-          {appState.heroes.map(hero =>
+          {appState.heroes.sort((a,b) => a.id - b.id).map(hero =>
             <li className={appState.selectedHero && hero.id === appState.selectedHero.id ? 'selected' : ''}
                 key={hero.id}
                 onClick={this.onHeroClick.bind(this, hero.id)}>
@@ -32,6 +33,8 @@ class HeroApp extends React.Component {
             </li>
           )}
         </ul>
+
+        <NewHero actions={actions}/>
 
         {
           appState.selectedHero 

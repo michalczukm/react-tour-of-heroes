@@ -1,4 +1,4 @@
-import {SELECT_HERO, CHANGE_NAME} from '../constants/ActionTypes';
+import {SELECT_HERO, CHANGE_NAME, ADD_HERO} from '../constants/ActionTypes';
 
 const initialState = {
     heroes: [
@@ -27,13 +27,13 @@ export default function heroAppState(state = initialState, action) {
 
 	switch (action.type) {
     case SELECT_HERO:
-      newState = Object.assign({}, state);
+      newState = cloneState(state);
       newState.selectedHero = state.heroes.find(hero =>
         hero.id === action.id
       );
       return newState;
     case CHANGE_NAME:
-      newState = Object.assign({}, state);
+      newState = cloneState(state);
       newState.heroes = newState.heroes.map(hero => {
           if (hero.id === action.id) {
             hero.name = action.newName;
@@ -42,7 +42,17 @@ export default function heroAppState(state = initialState, action) {
         }
       );
       return newState;
+    case ADD_HERO:
+      newState = cloneState(state);
+      const nextId = (newState.heroes.sort((a, b) => b.id - a.id).map(hero => hero.id)[0] || 0) + 1;
+
+      newState.heroes = state.heroes.concat([{ id: nextId, name: action.name }]);
+      return newState;
     default:
 			return state;
 	}
+}
+
+function cloneState(state) {
+  return Object.assign({}, state);
 }

@@ -6,18 +6,11 @@ no-debugger: 0
 import React, {PropTypes} from 'react';
 import HeroDetail from './HeroDetail';
 import NewHero from './NewHero';
+import HeroesList from './HeroesList';
 
 class HeroApp extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  onHeroClick(id) {
-    this.props.actions.selectHero(id);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.heroAppState.heroes.length > this.props.heroAppState.heroes.length;
   }
 
   render() {
@@ -27,16 +20,7 @@ class HeroApp extends React.Component {
     return (
       <div>
         <h1>{appState.title}</h1>
-        <h2>My Heroes</h2>
-        <ul className="heroes">
-          {appState.heroes.sort((a,b) => a.id - b.id).map(hero =>
-            <li className={appState.selectedHero && hero.id === appState.selectedHero.id ? 'selected' : ''}
-                key={hero.id}
-                onClick={this.onHeroClick.bind(this, hero.id)}>
-              <span className="badge">{hero.id}</span> {hero.name}
-            </li>
-          )}
-        </ul>
+        <HeroesList actions={actions} heroes={appState.heroes} selectedHero={appState.selectedHero}/>
 
         <NewHero actions={actions}/>
 

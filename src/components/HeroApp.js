@@ -16,6 +16,10 @@ class HeroApp extends React.Component {
     this.props.actions.selectHero(id);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.heroAppState.heroes.length > this.props.heroAppState.heroes.length;
+  }
+
   render() {
     let appState = this.props.heroAppState;
     let actions = this.props.actions;

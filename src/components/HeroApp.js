@@ -1,3 +1,8 @@
+/* eslint 
+no-console: 0,
+no-debugger: 0
+*/
+
 import React, {PropTypes} from 'react';
 import HeroDetail from './HeroDetail';
 
@@ -13,7 +18,7 @@ class HeroApp extends React.Component {
   render() {
     let appState = this.props.heroAppState;
     let actions = this.props.actions;
-
+    console.log("foo");
     return (
       <div>
         <h1>{appState.title}</h1>
@@ -28,8 +33,9 @@ class HeroApp extends React.Component {
           )}
         </ul>
 
-        {appState.selectedHero ?
-          <HeroDetail key={appState.selectedHero.id} hero={appState.selectedHero} actions={actions}/>
+        {
+          appState.selectedHero 
+          ? <HeroDetail key={appState.selectedHero.id} hero={appState.selectedHero} actions={actions}/>
           : null
         }
       </div>

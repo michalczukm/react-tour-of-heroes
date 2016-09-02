@@ -1,3 +1,8 @@
+/* eslint 
+no-console: 0,
+no-debugger: 0
+*/
+
 import React, {PropTypes} from 'react';
 
 class HeroDetail extends React.Component {
@@ -6,7 +11,7 @@ class HeroDetail extends React.Component {
   }
 
   onHeroNameChange(e) {
-    this.props.actions.changeName(this.props.hero.id, e.target.value);
+      this.props.actions.changeName(this.props.hero.id, e.target.value);
   }
 
   render() {
@@ -15,7 +20,7 @@ class HeroDetail extends React.Component {
     return (
       <div>
         <h2>{hero.name} details!</h2>
-        <div><label>id:</label> {hero.id}</div>
+        <div><label>id: </label> {hero.id}</div>
         <div>
           <label>name: </label>
           <input value={hero.name} onChange={this.onHeroNameChange.bind(this)} placeholder="name" />
